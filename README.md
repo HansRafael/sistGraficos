@@ -7,5 +7,5 @@
 
 ## necessary libs
 ```
-pip install glfw, PyOpenGL 
+pip install glfw PyOpenGL PyOpenGL_accelerate
 ```
