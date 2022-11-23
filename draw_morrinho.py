@@ -73,10 +73,6 @@ class DrawMorrinho:
         glut.glutSolidSphere(-1, 20, 20)
         self.draw_tree()
 
-        
-
-
-        
     def draw_tree(self):
         self.enable_tree_texture()
         glColor3ub(150, 75, 0)

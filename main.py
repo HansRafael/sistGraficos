@@ -116,6 +116,10 @@ while run:
             glTranslatef(-0.1,0,0)
         if keypress[pygame.K_a]:
             glTranslatef(0.1,0,0)
+        if keypress[pygame.K_b]:
+            glTranslatef(0,0.1,0)
+        if keypress[pygame.K_n]:
+            glTranslatef(0,-0.1,0)
 
         # apply the left and right rotation
         glRotatef(mouseMove[0]*0.1, 0.0, 1.0, 0.0)
@@ -147,10 +151,14 @@ while run:
         glRotate(-100, -100, 15, 15)
         lights()
         DrawMorrinho()
-        glRotate(10, 10, -110, -110)
-        glTranslated(40, 100, 11)
-        glScaled(5, 2, 5)
+        
+        
+        glTranslated(20, 40, -80)
+        glRotate(-90, 10, 0, 0)
+        glScaled(5, 5, 5)
+        
         DrawSymbol()
+
         glPopMatrix()
 
         pygame.display.flip()
