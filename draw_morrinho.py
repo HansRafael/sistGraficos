@@ -77,7 +77,7 @@ class DrawMorrinho:
         self.enable_tree_texture()
         glColor3ub(150, 75, 0)
         glScaled(0.05, 2, 0.05)
-        glut.glutSolidSphere(1, 200, 200)
+        glut.glutSolidSphere(1, 200, 2)
         self.disable_texture()
         glTranslated(0, 1, 0)
         glScaled(1, 0.01, 1)
