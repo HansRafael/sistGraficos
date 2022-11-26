@@ -132,7 +132,10 @@ while run:
         glPopMatrix()
         glMultMatrixf(viewMatrix)
 
-        glLightfv(GL_LIGHT0, GL_POSITION, [1, -1, 1, 0])
+        # change postion
+        direction = [1, -1, 1, 0]
+        glLightfv(GL_LIGHT0, GL_POSITION, direction)
+        
 
         glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
@@ -149,9 +152,8 @@ while run:
         
         glutInit(sys.argv)
         glRotate(-100, -100, 15, 15)
-        lights()
-        DrawMorrinho()
         
+        DrawMorrinho()
         
         glTranslated(20, 40, -80)
         glRotate(-90, 10, 0, 0)
