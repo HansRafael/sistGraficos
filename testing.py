@@ -2,7 +2,7 @@ import random
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from draw_morrinho import DrawMorrinho
-from draw_symbol import DrawSymbol
+from draw_furg_logo import DrawFURGLogo
 import sys,pygame
 
 def display():
@@ -24,7 +24,7 @@ def display():
 
   if time_control < 5 or time_control > 15:
     glDisable(GL_LIGHTING)
-    DrawSymbol()
+    DrawFURGLogo()
   else:
     glRotate(0, 10, 11, 10)
     DrawMorrinho()

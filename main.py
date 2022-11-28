@@ -1,11 +1,10 @@
 import pygame
 from pygame.locals import *
-import OpenGL.GLUT as glut
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 from draw_morrinho import DrawMorrinho
-from draw_symbol import DrawSymbol
+from draw_furg_logo import DrawFURGLogo
 from draw_floor import DrawFloor
 import sys
 import lights as lg
@@ -15,13 +14,13 @@ def main():
     display = (1200, 700)
     screen = pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
     
-    # enable aparecer na frente
+    # Enable showing in the front
     glEnable(GL_DEPTH_TEST)
 
-    #ligths
+    # Lights
     lg.lights()
     
-    # projection and perpective
+    # Projection and perpective
     glMatrixMode(GL_PROJECTION)
     gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
 
@@ -30,7 +29,7 @@ def main():
     viewMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
     glLoadIdentity()
 
-    # init mouse movement and center mouse on screen
+    # Init mouse movement and center mouse on screen
     displayCenter = [screen.get_size()[i] // 2 for i in range(2)]
     mouseMove = [0, 0]
     pygame.mouse.set_pos(displayCenter)
@@ -38,6 +37,7 @@ def main():
     up_down_angle = 0.0
     paused = False
     run = True
+    
     while run:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -54,22 +54,21 @@ def main():
                 pygame.mouse.set_pos(displayCenter)    
 
         if not paused:
-            # get keys
+            # Get keys
             keypress = pygame.key.get_pressed()
-            #mouseMove = pygame.mouse.get_rel()
-        
-            # init model view matrix
+                    
+            # Init model view matrix
             glLoadIdentity()
 
-            # apply the look up and down
+            # Apply the look up and down
             up_down_angle += mouseMove[1]*0.1
             glRotatef(up_down_angle, 1.0, 0.0, 0.0)
 
-            # init the view matrix
+            # Init the view matrix
             glPushMatrix()
             glLoadIdentity()
             
-            # apply the movment 
+            # Apply the movement 
             if keypress[pygame.K_w]:
                 glTranslatef(0,0,0.1)
             if keypress[pygame.K_s]:
@@ -83,20 +82,20 @@ def main():
             if keypress[pygame.K_n]:
                 glTranslatef(0,-0.1,0)
 
-            # apply the left and right rotation
+            # Apply the left and right rotation
             glRotatef(mouseMove[0]*0.1, 0.0, 1.0, 0.0)
 
-            # multiply the current matrix by the get the new view matrix and store the final vie matrix 
+            # Multiply the current matrix by the new view matrix and store the final view matrix 
             glMultMatrixf(viewMatrix)
             viewMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
 
-            # apply view matrix
+            # Apply view matrix
             glPopMatrix()
             glMultMatrixf(viewMatrix)
             
             glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
 
-            # light direction
+            # Light direction
             lg.direction()
 
             glPushMatrix()
@@ -113,7 +112,7 @@ def main():
             glRotate(-90, 10, 0, 0)
             glScaled(5, 5, 5)
            
-            DrawSymbol()
+            DrawFURGLogo()
 
             glPopMatrix()
 

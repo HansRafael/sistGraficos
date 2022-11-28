@@ -5,11 +5,6 @@ from OpenGL.GLU import *
 from OpenGL.GLUT import *
 from PIL import Image
 import numpy
-from draw_symbol import DrawSymbol
-
-from window import Window
-
-
 
 class DrawMorrinho:
     def __init__(self):
@@ -22,9 +17,8 @@ class DrawMorrinho:
         self.rotate_x = 0.0
         self.draw_floor()
         
-        
     def special(self, key, x):
-        # Rotate cube according to keys pressed
+        # Rotate cube according to the keys pressed
         angle = random.choice([0, 20, 30, 50, 60])
         if key == GLUT_KEY_RIGHT:
             glRotate(angle, 0, 1, 0)
