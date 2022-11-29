@@ -7,5 +7,12 @@
 
 ## necessary libs
 ```
-pip install glfw PyOpenGL PyOpenGL_accelerate
+pip install -r requirements.txt
+
+python3 main.py
 ```
+
+## How to control
+* A W S D -> control X and Y axios.
+* N to up
+* B to down

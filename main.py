@@ -13,6 +13,7 @@ def main():
     pygame.init()
     display = (1200, 700)
     screen = pygame.display.set_mode(display, DOUBLEBUF | OPENGL)
+    pygame.display.set_caption('Arthur, Hans e Laura projetao - FURG')
     
     # Enable showing in the front
     glEnable(GL_DEPTH_TEST)
