@@ -2,7 +2,7 @@ from OpenGL.GL import *
 import OpenGL.GLUT as glut
 
 
-class DrawSymbol:   
+class DrawFURGLogo:   
     def __init__(self):
         self.draw_yellow_sphere()
         self.draw_rectangle_right()
@@ -14,23 +14,11 @@ class DrawSymbol:
         self.draw_rectangle_right2()
         self.draw_rectangle_left2()
         self.draw_yellow_rectangle_fill()
-        
         self.draw_rectangle_fill()
-        # self.draw_space_left()
-        # self.draw_space_right()
-        # self.draw_space_down()
-        # self.draw_space_outside_down()
-        # self.draw_space_outside_left()
-        # self.draw_space_outside_right()
-        # self.draw_red_rectangle_down()
-        # self.draw_space_to_border_left()
-        # self.draw_space_to_border_right()
-        # self.draw_border_right()
-        # self.draw_border_left()
 
     def draw_rectangle_right(self):
         glPushMatrix()
-        glColor3ub(0, 0, 0) # 
+        glColor3ub(0, 0, 0) 
         glTranslated(2.5, 0, 0)
         glScaled(0.21, 2.0, -5.5)
         glut.glutSolidCube(1)
@@ -44,12 +32,9 @@ class DrawSymbol:
         glut.glutSolidCube(1)
         glPopMatrix()
 
-
-
-
     def draw_rectangle_right2(self):
         glPushMatrix()
-        glColor3ub(0, 0, 0) # 
+        glColor3ub(0, 0, 0) 
         glTranslated(1.5, 0, 1)
         glScaled(0.21, 2.0, -5)
         glut.glutSolidCube(1)
@@ -65,7 +50,7 @@ class DrawSymbol:
 
     def draw_rectangle_down(self):
         glPushMatrix()
-        glColor3ub(0, 0, 0) # vermelho
+        glColor3ub(0, 0, 0)
         glTranslated(0, 0, -2.4)
         glScaled(5.5, 2, 0.4)
         glut.glutSolidCube(1)
@@ -73,7 +58,7 @@ class DrawSymbol:
 
     def draw_rectangle_down2(self):
         glPushMatrix()
-        glColor3ub(0, 0, 0) # vermelho
+        glColor3ub(0, 0, 0) 
         glTranslated(0, 0, -1.4)
         glScaled(3, 2, 0.21)
         glut.glutSolidCube(1)
@@ -81,7 +66,7 @@ class DrawSymbol:
 
     def draw_rectangle_fill(self):
         glPushMatrix()
-        glColor3ub(255, 0, 0) # vermelho
+        glColor3ub(255, 0, 0)
         glTranslated(0, -0.1, -1.9)
         glScaled(4.79, 2, 1)
         glut.glutSolidCube(1)
@@ -90,7 +75,7 @@ class DrawSymbol:
 
     def draw_yellow_rectangle_fill(self):
         glPushMatrix()
-        glColor3ub(240, 159, 1) # vermelho
+        glColor3ub(240, 159, 1)
         glTranslated(0, -1, 0.15)
         glScaled(2.78, 1, 2.79)
         glut.glutSolidCube(1)
@@ -106,7 +91,7 @@ class DrawSymbol:
 
     def draw_red_sphere(self):
         glPushMatrix()
-        glColor3ub(255,0,0) # laranja
+        glColor3ub(255,0,0) 
         glTranslated(0, 0, 0.42)
         glScaled(2.45, 1, 2.45)
         glut.glutSolidSphere(1.1, 200, 200)
@@ -138,8 +123,6 @@ class DrawSymbol:
         glTranslated(-1.9, -0.55, 0)
         glScaled(8, 0.12, 1)
         glut.glutSolidCube(1)
-
-    
 
     def draw_space_outside_down(self):
         glColor3ub(0, 0, 0)
@@ -179,14 +162,12 @@ class DrawSymbol:
         glScaled(0.8, 1.9, 1)
         glut.glutSolidCube(1)
         glRotatef(-38, 0, 0, 1)
-        
 
     def draw_border_right(self):
         glColor3ub(255, 35, 35)
         glTranslated(-0.37, -0.5, 0)
         glScaled(0.45, 0.9, 1)
         glut.glutSolidCube(1)
-        
 
     def draw_border_left(self):
         glColor3ub(255, 35, 35)
