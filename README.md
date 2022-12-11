@@ -16,3 +16,5 @@ python3 main.py
 * A W S D -> control X and Y axios.
 * N to up
 * B to down
+* P to Perspective
+* O to Ortho

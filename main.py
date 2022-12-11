@@ -82,7 +82,22 @@ def main():
                 glTranslatef(0,0.1,0)
             if keypress[pygame.K_n]:
                 glTranslatef(0,-0.1,0)
+            if keypress[pygame.K_p]:
+                glMatrixMode(GL_PROJECTION)
+                glLoadIdentity()
 
+                gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
+                glMatrixMode(GL_MODELVIEW)
+                glLoadIdentity()
+            if keypress[pygame.K_o]:
+                glMatrixMode(GL_PROJECTION)
+                glLoadIdentity()
+                d = 2
+                f = (display[0]/display[1])
+                glOrtho(-d, d, -d * f, d * f, 0, 50.0)
+                glMatrixMode(GL_MODELVIEW)
+                glLoadIdentity()
+                
             # Apply the left and right rotation
             glRotatef(mouseMove[0]*0.1, 0.0, 1.0, 0.0)
 
