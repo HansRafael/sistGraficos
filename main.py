@@ -8,6 +8,7 @@ from draw_furg_logo import DrawFURGLogo
 from draw_floor import DrawFloor
 import sys
 import lights as lg
+import numpy as np
 
 def main():
     pygame.init()
@@ -28,6 +29,7 @@ def main():
     glMatrixMode(GL_MODELVIEW)
     gluLookAt(0, -8, 0, 0, 0, 0, 0, 0, 1)
     viewMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
+    print(f'initial {viewMatrix}')
     glLoadIdentity()
 
     # Init mouse movement and center mouse on screen
@@ -71,7 +73,9 @@ def main():
             
             # Apply the movement 
             if keypress[pygame.K_w]:
-                glTranslatef(0,0,0.1)
+                viewMatrix[3][2] = viewMatrix[3][2] + 0.1
+                print(f'w = {viewMatrix[3][2]}')
+                print(f'Mult {viewMatrix}')
             if keypress[pygame.K_s]:
                 glTranslatef(0,0,-0.1)
             if keypress[pygame.K_d]:
@@ -94,7 +98,7 @@ def main():
                 glLoadIdentity()
                 d = 2
                 f = (display[0]/display[1])
-                glOrtho(-d, d, -d * f, d * f, 0, 50.0)
+                glOrtho(-d, d, -d * f, d * f, 0.1, 50.0)
                 glMatrixMode(GL_MODELVIEW)
                 glLoadIdentity()
                 
@@ -104,7 +108,6 @@ def main():
             # Multiply the current matrix by the new view matrix and store the final view matrix 
             glMultMatrixf(viewMatrix)
             viewMatrix = glGetFloatv(GL_MODELVIEW_MATRIX)
-
             # Apply view matrix
             glPopMatrix()
             glMultMatrixf(viewMatrix)
@@ -131,6 +134,7 @@ def main():
             DrawFURGLogo()
 
             glPopMatrix()
+            print(f'after {viewMatrix}')
 
             pygame.display.flip()
             pygame.time.wait(10)
