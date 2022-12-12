@@ -86,32 +86,56 @@ def main():
             
             # Apply the movement translate
             if keypress[pygame.K_w]:
-                viewMatrix = opMatrix.glTranslatef(viewMatrix,0,0,0.1)
+                matrixTranslate = opMatrix.glTranslatef(0,0,0.1)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_s]:
-                viewMatrix = opMatrix.glTranslatef(viewMatrix,0,0,-0.1)
+                matrixTranslate = opMatrix.glTranslatef(0,0,-0.1)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_d]:
-                viewMatrix = opMatrix.glTranslatef(viewMatrix,-0.1,0,0)
+                matrixTranslate = opMatrix.glTranslatef(-0.1,0,0)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_a]:
-                viewMatrix = opMatrix.glTranslatef(viewMatrix,0.1,0,0)
+                matrixTranslate = opMatrix.glTranslatef(0.1,0,0)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_b]:
-                viewMatrix = opMatrix.glTranslatef(viewMatrix,0,0.1,0)
+                matrixTranslate = opMatrix.glTranslatef(0,0.1,0)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_n]:
-                viewMatrix = opMatrix.glTranslatef(viewMatrix,0,-0.1,0)
-            if keypress[pygame.K_p]:
+                matrixTranslate = opMatrix.glTranslatef(0,-0.1,0)
+                glMultMatrixf(matrixTranslate)
+            
+            #projecao perspectiva com frustum
+            if keypress[pygame.K_f]:
                 glMatrixMode(GL_PROJECTION)
                 glLoadIdentity()
 
+                frustum = opMatrix.glFrustum(-1, 1, 0, 1, 1, 10) 
+                glMultMatrixf(frustum)
+                glMatrixMode(GL_MODELVIEW)
+            
+            #projecao perspectiva normal (openGl)
+            if keypress[pygame.K_p]:
+                glMatrixMode(GL_PROJECTION)
+                glLoadIdentity()
+                #aqui nao precisamos chamar o glMultMatrixf pois dentro das sub-rotinas do gluPerpesctive ele é chamado
                 gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
                 glMatrixMode(GL_MODELVIEW)
-                glLoadIdentity()
+            
+            #projecao ortogonal
             if keypress[pygame.K_o]:
                 glMatrixMode(GL_PROJECTION)
                 glLoadIdentity()
                 d = 2
                 f = (display[0]/display[1])
-                glOrtho(-d, d, -d * f, d * f, 0.1, 50.0)
+                ortho = opMatrix.glOrtho(-d, d, -d * f, d * f, 0.1, 50.0)
+                glMultMatrixf(ortho)
                 glMatrixMode(GL_MODELVIEW)
-                glLoadIdentity()
+               
                 
             # Apply the left and right rotation
             glRotatef(mouseMove[0]*0.1, 0.0, 1.0, 0.0)
@@ -142,9 +166,9 @@ def main():
             
             glTranslated(20, 40, -80)
             glRotate(-90, 10, 0, 0)
+
             matrixScaled = opMatrix.glScaled(5, 5, 5)
             glMultMatrixf(matrixScaled)
-            print(viewMatrix)
             DrawFURGLogo()
 
             glPopMatrix()

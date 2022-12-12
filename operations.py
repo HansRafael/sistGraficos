@@ -1,10 +1,11 @@
 from math import cos, radians, sin
 import numpy as np
 
-def glTranslatef(matrix, x,y,z):
-  matrix[3][0] = matrix[3][0] + x
-  matrix[3][1] = matrix[3][1] + y
-  matrix[3][2] = matrix[3][2] + z
+def glTranslatef(x,y,z):
+  matrix = [[1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [x, y, z, 1]]
   return matrix
 
 
@@ -35,4 +36,22 @@ def glScaled(x,y,z):
       [ 0,  y, 0,  0],
       [ 0,  0,  z,  0],
       [ 0,  0, 0,  1]]
+  return matrix
+
+def glOrtho(left, right, bottom, top, near, far):
+    matrix = [[
+        [2/(right-left), 0, 0, -(right+left)/(right-left)],
+        [0, 2/(top-bottom), 0, -(top+bottom)/(top-bottom)],
+        [0, 0, -2/(far-near), -(far+near)/(far-near)],
+        [0, 0, 0, 1]
+    ]]
+    return matrix
+
+def glFrustum(left, right, bottom, top, near, far):
+  matrix = [[
+      [2*near/(right-left), 0, (right+left)/(right-left), 0],
+      [0, 2*near/(top-bottom), (top+bottom)/(top-bottom), 0],
+      [0, 0, -(far+near)/(far-near), -2*far*near/(far-near)],
+      [0, 0, -1, 0]
+  ]]
   return matrix

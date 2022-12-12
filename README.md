@@ -24,4 +24,9 @@ To rotate axios:
 * y 
 * z
 
+To change projection:
+* o -> ortogonal
+* f -> perspective frustum
+* p -> perspective openGl
+
 Scale is a function inside operations -> glScaled. It will return a matrix
