@@ -129,7 +129,9 @@ def main():
             lg.direction()
 
             glPushMatrix()
-            glScalef(0.15, 0.15, 0.15)
+            #glScalef(0.15, 0.15, 0.15)
+            matrixScaled = opMatrix.glScaled(0.15, 0.15, 0.15)
+            glMultMatrixf(matrixScaled)
 
             DrawFloor()
         
@@ -140,7 +142,7 @@ def main():
             
             glTranslated(20, 40, -80)
             glRotate(-90, 10, 0, 0)
-            matrixScaled = opMatrix.glScaled(10, 10, 10)
+            matrixScaled = opMatrix.glScaled(5, 5, 5)
             glMultMatrixf(matrixScaled)
             print(viewMatrix)
             DrawFURGLogo()
