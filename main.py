@@ -9,6 +9,7 @@ from draw_floor import DrawFloor
 import sys
 import lights as lg
 import numpy as np
+import operations as opMatrix
 
 def main():
     pygame.init()
@@ -70,37 +71,71 @@ def main():
             # Init the view matrix
             glPushMatrix()
             glLoadIdentity()
+
+            #apply rotate movent
+            if keypress[pygame.K_x]:
+                matrixRotate = opMatrix.glsRotateX(0.1)
+                glMultMatrixf(matrixRotate)
+            if keypress[pygame.K_y]:
+                matrixRotate = opMatrix.glsRotateY(0.1)
+                glMultMatrixf(matrixRotate)
+            if keypress[pygame.K_z]:
+                matrixRotate = opMatrix.glsRotateZ(0.1)
+                glMultMatrixf(matrixRotate)
+      
             
-            # Apply the movement 
+            # Apply the movement translate
             if keypress[pygame.K_w]:
-                viewMatrix[3][2] = viewMatrix[3][2] + 0.1
-                print(f'w = {viewMatrix[3][2]}')
-                print(f'Mult {viewMatrix}')
+                matrixTranslate = opMatrix.glTranslatef(0,0,0.1)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_s]:
-                glTranslatef(0,0,-0.1)
+                matrixTranslate = opMatrix.glTranslatef(0,0,-0.1)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_d]:
-                glTranslatef(-0.1,0,0)
+                matrixTranslate = opMatrix.glTranslatef(-0.1,0,0)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_a]:
-                glTranslatef(0.1,0,0)
+                matrixTranslate = opMatrix.glTranslatef(0.1,0,0)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_b]:
-                glTranslatef(0,0.1,0)
+                matrixTranslate = opMatrix.glTranslatef(0,0.1,0)
+                glMultMatrixf(matrixTranslate)
+            
             if keypress[pygame.K_n]:
-                glTranslatef(0,-0.1,0)
-            if keypress[pygame.K_p]:
+                matrixTranslate = opMatrix.glTranslatef(0,-0.1,0)
+                glMultMatrixf(matrixTranslate)
+            
+            #projecao perspectiva com frustum
+            if keypress[pygame.K_f]:
                 glMatrixMode(GL_PROJECTION)
                 glLoadIdentity()
 
+                frustum = opMatrix.glFrustum(-1, 1, 0, 1, 1, 10) 
+                glMultMatrixf(frustum)
+                glMatrixMode(GL_MODELVIEW)
+            
+            #projecao perspectiva normal (openGl)
+            if keypress[pygame.K_p]:
+                glMatrixMode(GL_PROJECTION)
+                glLoadIdentity()
+                #aqui nao precisamos chamar o glMultMatrixf pois dentro das sub-rotinas do gluPerpesctive ele é chamado
                 gluPerspective(45, (display[0]/display[1]), 0.1, 50.0)
                 glMatrixMode(GL_MODELVIEW)
-                glLoadIdentity()
+            
+            #projecao ortogonal
             if keypress[pygame.K_o]:
                 glMatrixMode(GL_PROJECTION)
                 glLoadIdentity()
                 d = 2
                 f = (display[0]/display[1])
-                glOrtho(-d, d, -d * f, d * f, 0.1, 50.0)
+                ortho = opMatrix.glOrtho(-d, d, -d * f, d * f, 0.1, 50.0)
+                glMultMatrixf(ortho)
                 glMatrixMode(GL_MODELVIEW)
-                glLoadIdentity()
+               
                 
             # Apply the left and right rotation
             glRotatef(mouseMove[0]*0.1, 0.0, 1.0, 0.0)
@@ -118,7 +153,9 @@ def main():
             lg.direction()
 
             glPushMatrix()
-            glScalef(0.15, 0.15, 0.15)
+            #glScalef(0.15, 0.15, 0.15)
+            matrixScaled = opMatrix.glScaled(0.15, 0.15, 0.15)
+            glMultMatrixf(matrixScaled)
 
             DrawFloor()
         
@@ -129,12 +166,12 @@ def main():
             
             glTranslated(20, 40, -80)
             glRotate(-90, 10, 0, 0)
-            glScaled(5, 5, 5)
-           
+
+            matrixScaled = opMatrix.glScaled(5, 5, 5)
+            glMultMatrixf(matrixScaled)
             DrawFURGLogo()
 
             glPopMatrix()
-            print(f'after {viewMatrix}')
 
             pygame.display.flip()
             pygame.time.wait(10)
